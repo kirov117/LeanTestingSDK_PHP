@@ -66,7 +66,7 @@ class EntityHandler
      *
      * Function definition for retrieving an existing entity. Base function checks for invalid parameters.
      *
-     * @param integer $id ID field to look for in the entity collection
+     * @param int $id ID field to look for in the entity collection
      *
      * @throws SDKInvalidArgException if provided $id param is not an integer.
      *
@@ -81,7 +81,7 @@ class EntityHandler
      *
      * Function definition for deleting an existing entity. Base function checks for invalid parameters.
      *
-     * @param integer $id ID field of entity to delete in the entity collection
+     * @param int $id ID field of entity to delete in the entity collection
      *
      * @throws SDKInvalidArgException if provided $id param is not an integer.
      *
@@ -96,7 +96,7 @@ class EntityHandler
      *
      * Function definition for updating an existing entity. Base function checks for invalid parameters.
      *
-     * @param integer $id     ID field of entity to update in the entity collection
+     * @param int     $id     ID field of entity to update in the entity collection
      * @param mixed[] $fields Non-empty array consisting of entity data to send for update
      *
      * @throws SDKInvalidArgException if provided $id param is not an integer.
