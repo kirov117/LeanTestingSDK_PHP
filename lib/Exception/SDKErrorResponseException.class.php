@@ -2,15 +2,13 @@
 
 namespace LeanTesting\API\Client;
 
-class SDKInvalidArgException extends SDKException
+class SDKErrorResponseException extends SDKException
 {
-	private $base_message = 'Invalid argument';
-
 	public function __construct($message = null, $code = 0, Exception $previous = null) {
 		if ($message == null) {
-			$message = $this->base_message;
+			$message = 'Unknown remote error';
 		} else {
-			$message = $this->base_message . ': ' . $message;
+			$message = 'Got error response: ' . $message;
 		}
 
 		parent::__construct($message, $code, $previous);

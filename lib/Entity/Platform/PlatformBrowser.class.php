@@ -6,9 +6,9 @@ class PlatformBrowser extends Entity
 {
 	public $versions;
 
-	public function __construct($data) {
-		parent::__construct($data);
+	public function __construct($origin, $data) {
+		parent::__construct($origin, $data);
 
-		$this->versions = new PlatformBrowserVersionsHandler($this->data['id']);
+		$this->versions = new PlatformBrowserVersionsHandler($origin, $data['id']);
 	}
 }

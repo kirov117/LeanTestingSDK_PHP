@@ -15,18 +15,18 @@ class Project extends Entity
 
     public $bugs;
 
-    public function __construct($data) {
-        parent::__construct($data);
+    public function __construct($origin, $data) {
+        parent::__construct($origin, $data);
 
-        $this->sections = new ProjectSectionsHandler($this->data['id']);
-        $this->versions = new ProjectVersionsHandler($this->data['id']);
-        $this->users    = new ProjectUsersHandler($this->data['id']);
+        $this->sections = new ProjectSectionsHandler($origin, $data['id']);
+        $this->versions = new ProjectVersionsHandler($origin, $data['id']);
+        $this->users    = new ProjectUsersHandler($origin, $data['id']);
 
-        $this->bugTypeScheme            = new ProjectBugTypeSchemeHandler($this->data['id']);
-        $this->bugStatusScheme          = new ProjectBugStatusSchemeHandler($this->data['id']);
-        $this->bugSeverityScheme        = new ProjectBugSeveritySchemeHandler($this->data['id']);
-        $this->bugReproducibilityScheme = new ProjectBugReproducibilitySchemeHandler($this->data['id']);
+        $this->bugTypeScheme            = new ProjectBugTypeSchemeHandler($origin, $data['id']);
+        $this->bugStatusScheme          = new ProjectBugStatusSchemeHandler($origin, $data['id']);
+        $this->bugSeverityScheme        = new ProjectBugSeveritySchemeHandler($origin, $data['id']);
+        $this->bugReproducibilityScheme = new ProjectBugReproducibilitySchemeHandler($origin, $data['id']);
 
-        $this->bugs = new ProjectBugsHandler($this->data['id']);
+        $this->bugs = new ProjectBugsHandler($origin, $data['id']);
     }
 }

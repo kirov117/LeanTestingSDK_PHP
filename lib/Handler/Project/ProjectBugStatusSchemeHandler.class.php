@@ -6,11 +6,16 @@ class ProjectBugStatusSchemeHandler extends EntityHandler
 {
 	protected $project_id;
 
-    public function __construct($project_id) {
+    public function __construct($origin, $project_id) {
+    	parent::__construct($origin);
+
         $this->project_id = $project_id;
     }
 
     public function all($filters = []) {
-        //TODO
+        parent::all($filters);
+
+        $request = new APIRequest($this->origin, '/v1/projects/' . $this->project_id . '/bug-status-scheme', 'GET');
+        return new EntityList($this->origin, $request, 'ProjectBugScheme', $filters);
     }
 }

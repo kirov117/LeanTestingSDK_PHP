@@ -2,7 +2,7 @@
 
 namespace LeanTesting\API\Client;
 
-class ProjectSection extends Entity
+class ProjectBugScheme extends Entity
 {
 	public function __construct($origin, $data) {
         parent::__construct($origin, $data);

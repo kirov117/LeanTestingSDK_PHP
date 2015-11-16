@@ -6,15 +6,35 @@ class ProjectVersionsHandler extends EntityHandler
 {
 	protected $project_id;
 
-    public function __construct($project_id) {
+    public function __construct($origin, $project_id) {
+        parent::__construct($origin);
+
         $this->project_id = $project_id;
     }
 
     public function create($fields) {
-        //TODO
+        parent::create($fields);
+
+        $supports = [
+            'number' => REQUIRED
+        ];
+
+        if ($this->enforce($fields, $supports)) {
+            $req = new APIRequest(
+                $this->origin,
+                '/v1/projects/' . $this->project_id . '/versions',
+                'POST',
+                ['params' => $fields]
+            );
+
+            return new ProjectVersion($this->origin, $req->exec());
+        }
     }
 
     public function all($filters = []) {
-        //TODO
+        parent::all($filters);
+
+        $request = new APIRequest($this->origin, '/v1/projects/' . $this->project_id . '/versions', 'GET');
+        return new EntityList($this->origin, $request, 'ProjectVersion', $filters);
     }
 }

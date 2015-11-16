@@ -6,9 +6,9 @@ class PlatformType extends Entity
 {
 	public $devices;
 
-	public function __construct($data) {
-		parent::__construct($data);
+	public function __construct($origin, $data) {
+		parent::__construct($origin, $data);
 
-		$this->devices = new PlatformTypeDevicesHandler($this->data['id']);
+		$this->devices = new PlatformTypeDevicesHandler($origin, $data['id']);
 	}
 }

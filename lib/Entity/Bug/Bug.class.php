@@ -7,10 +7,10 @@ class Bug extends Entity
 	public $comments;
 	public $attachments;
 
-	public function __construct($data) {
-        parent::__construct($data);
+	public function __construct($origin, $data) {
+        parent::__construct($origin, $data);
 
-        $this->comments    = new BugCommentsHandler($this->data['id']);
-        $this->attachments = new BugAttachmentsHandler($this->data['id']);
+        $this->comments    = new BugCommentsHandler($origin, $data['id']);
+        $this->attachments = new BugAttachmentsHandler($origin, $data['id']);
     }
 }

@@ -2,11 +2,34 @@
 
 namespace LeanTesting\API\Client;
 
+/**
+ *
+ * Represents a single Entity. All remote responses are decoded and parsed into one or more Entities.
+ *
+ */
 class Entity
 {
-	public $data;
+	public $origin; // Reference to originating Client instance
+	public $data;   // Internal entity object data
 
-	public function __construct($data) {
-		$this->data = $data;
+	/**
+	 *
+	 * Constructs an Entity instance
+	 *
+	 * @param mixed[] @data Data to be contained in the new Entity. Must be non-empty.
+	 *
+	 * @throws SDKInvalidArgException if provided $data param is not an array.
+	 * @throws SDKInvalidArgException if provided $data param is empty. Entities cannot be empty.
+	 *
+	 */
+	public function __construct(PHPClient $origin, $data) {
+		if (!is_array($data)) {
+            throw new SDKInvalidArgException('`$data` must be an array');
+        } elseif (!count($data)) {
+            throw new SDKInvalidArgException('`$data` must be non-empty');
+        }
+
+        $this->origin = $origin;
+		$this->data   = $data;
 	}
 }
