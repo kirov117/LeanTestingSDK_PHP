@@ -140,7 +140,7 @@ class EntityHandler
         $mreq  = [];        // Missing required keys
 
         foreach ($supports as $sk => $sv) {
-            if ($sv === 1) {
+            if ($sv === REQUIRED) {
                 array_push($sreq, $sk);
             }
             array_push($sall, $sk);
@@ -157,23 +157,18 @@ class EntityHandler
 
         foreach ($socc as $ok => $ov) {
             if ($ov > 1) {
-                array_push($dupl, $k);
+                array_push($dupl, $ok);
             } elseif ($ov === 0 && in_array($ok, $sreq)) {
-                array_push($mreq, $k);
+                array_push($mreq, $ok);
             }
         }
 
         if (count($unsup)) {
             throw new SDKUnsupportedRequestException($unsup);
-            return false;
-        }
-        if (count($mreq)) {
+        } elseif (count($mreq)) {
             throw new SDKIncompleteRequestException($mreq);
-            return false;
-        }
-        if (count($dupl)) {
+        } elseif (count($dupl)) {
             throw new SDKDuplicateRequestException($dupl);
-            return false;
         }
 
         return true;

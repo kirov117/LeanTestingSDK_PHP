@@ -11,7 +11,7 @@ namespace LeanTesting\API\Client;
  */
 class OAuth2Handler
 {
-	private $origin; // Reference to originating Client instance
+	private $origin; // Reference to originating PHPClient instance
 
     public function __construct(PHPClient $origin) {
         $this->origin = $origin;

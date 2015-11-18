@@ -12,18 +12,16 @@ namespace LeanTesting\API\Client;
 class APIRequest
 {
 
-	protected $default_opts = [ // Basic support for extended opts
-		'base_uri'     => 'https://api.leantesting.com', // assumed default for API base
-		'form_data'    => false,                         // sets content type to multipart/form-data if true
-		'params'       => []                             // params to be pased in request
+	protected $default_opts = [                          // Basic support for extended opts
+		'base_uri'  => 'https://api.leantesting.com', // assumed default for API base
+		'form_data' => false,                         // sets content type to multipart/form-data if true
+		'params'    => []                             // params to be pased in request
 	];
 
 	protected $origin;
 	protected $endpoint;
 	protected $method;
 	protected $opts;
-
-	protected $curl_handler = null;
 
 	/**
 	 *
@@ -52,6 +50,7 @@ class APIRequest
             throw new SDKInvalidArgException('`$opts` must be an array');
         }
 
+        $this->opts = $this->default_opts;
 		$this->updateOpts($opts);
 
 		$this->origin   = $origin;
@@ -76,7 +75,7 @@ class APIRequest
 			throw new SDKInvalidArgException('`$opts[\'params\']` must be an array');
 		}
 
-		$this->opts = array_merge($this->default_opts, $opts);
+		$this->opts = array_merge($this->opts, $opts);
 	}
 
 	/**
@@ -93,16 +92,15 @@ class APIRequest
 	 *
 	 */
 	public function exec() {
-		$this->curl_handler = curl_init();
+		$ch = curl_init();
 
 		$curl_headers = [];
 
 		$call_url = $this->opts['base_uri'] . $this->endpoint;
 
-		curl_setopt($this->curl_handler, CURLOPT_CUSTOMREQUEST, $this->method);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
 
-		// Method-oriented parsing
-		switch ($this->method) {
+		switch ($this->method) { // Method-oriented parsing
 			case 'GET':
 				$expected_http_status = 200;
 
@@ -114,12 +112,12 @@ class APIRequest
 				$expected_http_status = 200;
 
 				if ($this->opts['form_data'] === true) {
-					curl_setopt($this->curl_handler, CURLOPT_POSTFIELDS, $this->opts['params']);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $this->opts['params']);
 
 					array_push($curl_headers, 'Content-Type: multipart/form-data');
 				} else {
 					$json_data = json_encode($this->opts['params']);
-					curl_setopt($this->curl_handler, CURLOPT_POSTFIELDS, $json_data);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
 
 					array_push($curl_headers, 'Content-Type: application/json');
 					array_push($curl_headers, 'Content-Length: ' . strlen($json_data));
@@ -136,21 +134,21 @@ class APIRequest
 			array_push($curl_headers, 'Authorization: Bearer ' . $this->origin->getCurrentToken());
 		}
 
-		curl_setopt($this->curl_handler, CURLOPT_HTTPHEADER, $curl_headers);
-		curl_setopt($this->curl_handler, CURLOPT_URL, $call_url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $curl_headers);
+		curl_setopt($ch, CURLOPT_URL, $call_url);
 
-		curl_setopt($this->curl_handler, CURLOPT_HEADER, false);
-		curl_setopt($this->curl_handler, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-		$curl_data = curl_exec($this->curl_handler);
-		$curl_status = (int)curl_getinfo($this->curl_handler, CURLINFO_HTTP_CODE);
+		$curl_data = curl_exec($ch);
+		$curl_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		if ($curl_status !== $expected_http_status) {
 			throw new SDKErrorResponseException($curl_data);
 		}
 
-		curl_close($this->curl_handler);
-		$this->curl_handler = null;
+		curl_close($ch);
+		$ch = null;
 
 		if ($this->method === 'DELETE') {           // if DELETE request, expect no output
 			return true;

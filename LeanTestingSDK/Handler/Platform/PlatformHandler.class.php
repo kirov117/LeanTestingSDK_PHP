@@ -12,9 +12,9 @@ class PlatformHandler extends EntityHandler
 	public function __construct(PHPClient $origin) {
 		parent::__construct($origin);
 
-		$types    = new PlatformTypesHandler($origin);
-		$devices  = new PlatformDevicesHandler($origin);
-		$os       = new PlatformOSHandler($origin);
-		$browsers = new PlatformBrowsersHandler($origin);
+		$this->types    = new PlatformTypesHandler($origin);
+		$this->devices  = new PlatformDevicesHandler($origin);
+		$this->os       = new PlatformOSHandler($origin);
+		$this->browsers = new PlatformBrowsersHandler($origin);
 	}
 }

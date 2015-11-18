@@ -16,7 +16,8 @@ class Entity
 	 *
 	 * Constructs an Entity instance
 	 *
-	 * @param mixed[] @data Data to be contained in the new Entity. Must be non-empty.
+	 * @param PHPClient $origin Original client instance reference
+	 * @param mixed[]   $data   Data to be contained in the new Entity. Must be non-empty.
 	 *
 	 * @throws SDKInvalidArgException if provided $data param is not an array.
 	 * @throws SDKInvalidArgException if provided $data param is empty. Entities cannot be empty.

@@ -6,13 +6,12 @@ class SDKIncompleteRequestException extends SDKException
 {
 	private $base_message = 'Incomplete request data';
 
-	public function __construct($message = null, $code = 0, Exception $previous = null) {
+	public function __construct($message = null) {
 		if (is_array($message)) {
-			$arr = $message;
-			foreach ($arr as $a) {
-				$a = '`' . $a . '`';
+			foreach ($message as $m) {
+				$m = '`' . $m . '`';
 			}
-			$message = implode(', ', $a);
+			$message = implode(', ', $message);
 		}
 
 		if ($message == null) {
@@ -21,6 +20,6 @@ class SDKIncompleteRequestException extends SDKException
 			$message = $this->base_message . ' - missing required ' . $message;
 		}
 
-		parent::__construct($message, $code, $previous);
+		parent::__construct($message);
 	}
 }

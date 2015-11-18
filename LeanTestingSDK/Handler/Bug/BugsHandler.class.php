@@ -32,13 +32,13 @@ class BugsHandler extends EntityHandler
             'description'        => OPTIONAL,
             'expected_results'   => OPTIONAL,
             'steps'              => OPTIONAL,
-            'platform'           => OPTIONAL,
-            'device_model'       => OPTIONAL,
-            'device_model_id'    => OPTIONAL,
-            'os'                 => OPTIONAL,
-            'os_version'         => OPTIONAL,
-            'os_version_id'      => OPTIONAL,
-            'browser_version_id' => OPTIONAL
+            'platform'           => OPTIONAL
+            // 'device_model'       => OPTIONAL,
+            // 'device_model_id'    => OPTIONAL,
+            // 'os'                 => OPTIONAL,
+            // 'os_version'         => OPTIONAL,
+            // 'os_version_id'      => OPTIONAL,
+            // 'browser_version_id' => OPTIONAL
         ];
 
         if ($this->enforce($fields, $supports)) {

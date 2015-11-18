@@ -31,7 +31,7 @@ class EntityList implements \Iterator
 	 *
 	 * (Re)generates internal collection data based on current iteration position.
 	 *
-	 * Regeneration is done every time position changes (i.e. every time repositioning functionns are used).
+	 * Regeneration is done every time position changes (i.e. every time repositioning functions are used).
 	 *
 	 * @throws SDKUnexpectedResponseException if no `meta` field is found
 	 * @throws SDKUnexpectedResponseException if no `pagination` field is found in `meta field`
@@ -66,9 +66,9 @@ class EntityList implements \Iterator
 			throw new SDKUnexpectedResponseException('expected one collection object, multiple received: ' . $cols);
 		}
 
-		$classIdent = $this->identifier; // Identifier to be used for dynamic Entity instancing
+		$class_ident = $this->identifier; // Identifier to be used for dynamic Entity instancing
 		foreach (reset($raw) as $entity) {
-			array_push($this->collection, new $classIdent($this->origin, $entity));
+			array_push($this->collection, new $class_ident($this->origin, $entity));
 		}
 	}
 
@@ -76,6 +76,7 @@ class EntityList implements \Iterator
 	 *
 	 * Constructs an Entity List instance.
 	 *
+	 * @param PHPClient  $origin     Original client instance reference
 	 * @param APIRequest $request    An API Request definition given by the entity collection handler.
 	 *                               This is used for any subsequent collection regeneration, as any data updates are
 	 *                               dependant on external requests.
@@ -142,7 +143,6 @@ class EntityList implements \Iterator
 		}
 
 		$this->generateCollectionData();
-
 		++$this->real_page;
 	}
 
@@ -252,7 +252,7 @@ class EntityList implements \Iterator
 	 */
 	public function toArray() {
 		$arr = [];
-		foreach($collection as $entity) {
+		foreach($this->collection as $entity) {
 			array_push($arr, $entity->data);
 		}
 		return $arr;
