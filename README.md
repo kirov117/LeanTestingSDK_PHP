@@ -5,7 +5,7 @@
 
 ~~/////////////////////////////////////////////////////////////////////////////////////~~
 
-- *Including Lean Testing PHP SDK*
+- Including Lean Testing PHP SDK
 ```php
 require 'LeanTestingSDK_PHP/PHPClient.php';
 ```
