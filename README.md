@@ -24,13 +24,13 @@ $LT->getCurrentToken()
 
 - Attach New **Token**
 ```php
-$LT->attachToken('9ErdKZXpGPnvHuJ9di92eAFqrp14GKvfHMyclGGh');
+$LT->attachToken('9ErdKZXpGPovHuJ9dx92eAFqrp14GKvfHMyclGGh');
 ```
 
 - Generate **Authorization URL**
 ```php
 $generated_URL = $LT->auth->generateAuthLink(
-	'DHxaSvtplj1Xos4vb7dwGKkXRu0GJmd5Rdha2HHx',
+	'DHxaSvtpl91Xos4vb7d0GKkXRu0GJxd5Rdha2HHx',
 	'https://www.example.com/appurl/',
 	'admin',
 	'a3ahdh2iqhdasdasfdjahf26'
@@ -41,8 +41,8 @@ print_r( $generated_URL );
 - Exchange Authorization Code For **Access TOKEN**
 ```php
 $token = $LT->auth->exchangeAuthCode(
-	'RBxaSvtplj1Xos4vbEbwGKkXRu0GJmd5Rdha2HHa',
-	'FpOZxNbe9VEwVbjUINoAepOhgS8FNQsOkpE4CtPO',
+	'DHxaSvtpl91Xos4vb7d0GKkXRu0GJxd5Rdha2HHx',
+	'DpOZxNbeL1arVbjUINoA9pOhgS8FNQsOkpE4CtXU',
 	'authorization_code',
 	'sOgY2DT47B2K0bqashnk0E6wUaYgbbspwdy9kGrk',
 	'https://www.example.com/appurl/'

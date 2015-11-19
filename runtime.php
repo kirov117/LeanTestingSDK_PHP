@@ -8,10 +8,6 @@ use LeanTesting\API\Client\PHPClient as LeanTestingClient;
 $LT = new LeanTestingClient();
 $LT->attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk');
 
-$col = $LT->projects->all(['limit' => 2]);
-foreach ($col as $c) {
-	print_r($c);
-}
 
 /* METHOD DEMONSTRATIONS */
 
