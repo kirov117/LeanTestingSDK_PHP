@@ -55,7 +55,7 @@ class EntityHandler
             throw new SDKInvalidArgException('`$filters` must be an array');
         } else {
             foreach ($filters as $fk => $fv) {
-                if (!in_array($fk, ['limit', 'page'])) {
+                if (!in_array($fk, ['include', 'limit', 'page'])) {
                     throw new SDKInvalidArgException('unsupported ' . $fk . ' for `$filters`');
                 }
             }
