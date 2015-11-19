@@ -18,9 +18,9 @@ define('MAX_DEPTH_LEVEL', 2);
  *
  */
 function recurseRequire($dir, $depth = 0) {
-	if ($depth > MAX_DEPTH_LEVEL) {
-		return;
-	}
+    if ($depth > MAX_DEPTH_LEVEL) {
+        return;
+    }
 
     $scan = glob($dir . DIRECTORY_SEPARATOR . '*');
     foreach ($scan as $path) {
@@ -28,6 +28,6 @@ function recurseRequire($dir, $depth = 0) {
             require $path;
         } elseif (is_dir($path)) {
             recurseRequire($path, $depth + 1);
-		}
+        }
     }
 }
