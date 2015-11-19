@@ -234,7 +234,7 @@ $LT->platform->devices->find(11)->data
 
 - List **OS**
 ```php
-LT->platform->os->all()->toArray()
+$LT->platform->os->all()->toArray()
 ```
 
 - Retrieve Existing **OS**
