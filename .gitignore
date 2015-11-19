@@ -1,2 +1,6 @@
 .old
 runtime.php
+
+src/.old
+src/loader.php
+src/common.php
