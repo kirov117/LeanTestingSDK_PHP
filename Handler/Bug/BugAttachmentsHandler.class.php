@@ -4,13 +4,13 @@ namespace LeanTesting\API\Client;
 
 class BugAttachmentsHandler extends EntityHandler
 {
-	protected $bug_id;
+    protected $bug_id;
 
-	public function __construct($origin, $bug_id) {
+    public function __construct($origin, $bug_id) {
         parent::__construct($origin);
 
-		$this->bug_id = $bug_id;
-	}
+        $this->bug_id = $bug_id;
+    }
 
     /**
      *

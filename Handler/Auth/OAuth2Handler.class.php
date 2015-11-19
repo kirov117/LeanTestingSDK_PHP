@@ -11,13 +11,13 @@ namespace LeanTesting\API\Client;
  */
 class OAuth2Handler
 {
-	private $origin; // Reference to originating PHPClient instance
+    private $origin; // Reference to originating PHPClient instance
 
     public function __construct(PHPClient $origin) {
         $this->origin = $origin;
     }
 
-	/**
+    /**
      *
      * Function that generates link for user to follow in order to request authorization code
      *
@@ -34,35 +34,35 @@ class OAuth2Handler
      * @return string returns URL to follow for authorization code request
      *
      */
-	public function generateAuthLink($client_id, $redirect_uri, $scope = 'read', $state = null) {
-		if (!is_string($client_id)) {
+    public function generateAuthLink($client_id, $redirect_uri, $scope = 'read', $state = null) {
+        if (!is_string($client_id)) {
             throw new SDKInvalidArgException('`$client_id` must be a string');
         } elseif (!is_string($redirect_uri)) {
-        	throw new SDKInvalidArgException('`$redirect_uri` must be a string');
+            throw new SDKInvalidArgException('`$redirect_uri` must be a string');
         } elseif (!is_string($scope)) {
-        	throw new SDKInvalidArgException('`$scope` must be a string');
+            throw new SDKInvalidArgException('`$scope` must be a string');
         } elseif ($state != null && !is_string($state)) {
-        	throw new SDKInvalidArgException('`$state` must be a string');
+            throw new SDKInvalidArgException('`$state` must be a string');
         }
 
         $base_url = 'https://leantesting.com/login/oauth/authorize';
 
         $params = [
-        	'client_id'    => $client_id,
-        	'redirect_uri' => $redirect_uri,
-        	'scope'        => $scope
+            'client_id'    => $client_id,
+            'redirect_uri' => $redirect_uri,
+            'scope'        => $scope
         ];
 
         if ($state != null) {
-        	$params['state'] = $state;
+            $params['state'] = $state;
         }
 
         $base_url .= '?' . http_build_query($params);
 
         return $base_url;
-	}
+    }
 
-	/**
+    /**
      *
      * Generates an access token string from the provided authorization code
      *
@@ -81,38 +81,38 @@ class OAuth2Handler
      * @return string returns obtained access token string
      *
      */
-	public function exchangeAuthCode($client_id, $client_secret, $grant_type, $code, $redirect_uri) {
-		if (!is_string($client_id)) {
+    public function exchangeAuthCode($client_id, $client_secret, $grant_type, $code, $redirect_uri) {
+        if (!is_string($client_id)) {
             throw new SDKInvalidArgException('`$client_id` must be a string');
         } elseif (!is_string($client_secret)) {
-        	throw new SDKInvalidArgException('`$client_secret` must be a string');
+            throw new SDKInvalidArgException('`$client_secret` must be a string');
         } elseif (!is_string($grant_type)) {
-        	throw new SDKInvalidArgException('`$grant_type` must be a string');
+            throw new SDKInvalidArgException('`$grant_type` must be a string');
         } elseif (!is_string($code)) {
-        	throw new SDKInvalidArgException('`$code` must be a string');
+            throw new SDKInvalidArgException('`$code` must be a string');
         } elseif (!is_string($redirect_uri)) {
-        	throw new SDKInvalidArgException('`$redirect_uri` must be a string');
+            throw new SDKInvalidArgException('`$redirect_uri` must be a string');
         }
 
         $params = [
-        	'grant_type'    => $grant_type,
-        	'client_id'     => $client_id,
-        	'client_secret' => $client_secret,
-        	'redirect_uri'  => $redirect_uri,
-        	'code'          => $code
+            'grant_type'    => $grant_type,
+            'client_id'     => $client_id,
+            'client_secret' => $client_secret,
+            'redirect_uri'  => $redirect_uri,
+            'code'          => $code
         ];
 
         $req = new APIRequest(
-        	$this->origin,
-        	'/login/oauth/access_token',
-        	'POST',
-        	[
-        		'base_uri' => 'https://leantesting.com',
-        		'params'   => $params
-        	]
+            $this->origin,
+            '/login/oauth/access_token',
+            'POST',
+            [
+                'base_uri' => 'https://leantesting.com',
+                'params'   => $params
+            ]
         );
 
         $resp = $req->exec();
         return $resp['access_token'];
-	}
+    }
 }

@@ -4,7 +4,7 @@ namespace LeanTesting\API\Client;
 
 class ProjectBugsHandler extends EntityHandler
 {
-	protected $project_id;
+    protected $project_id;
 
     public function __construct($origin, $project_id) {
         parent::__construct($origin);

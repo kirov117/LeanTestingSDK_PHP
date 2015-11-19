@@ -4,11 +4,11 @@ namespace LeanTesting\API\Client;
 
 class PlatformBrowser extends Entity
 {
-	public $versions;
+    public $versions;
 
-	public function __construct($origin, $data) {
-		parent::__construct($origin, $data);
+    public function __construct($origin, $data) {
+        parent::__construct($origin, $data);
 
-		$this->versions = new PlatformBrowserVersionsHandler($origin, $data['id']);
-	}
+        $this->versions = new PlatformBrowserVersionsHandler($origin, $data['id']);
+    }
 }

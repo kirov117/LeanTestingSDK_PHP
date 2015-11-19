@@ -4,13 +4,13 @@ namespace LeanTesting\API\Client;
 
 class SDKException extends \Exception
 {
-	public function __construct($message = null) {
-		if ($message == null) {
-			$message = 'Unknown SDK Error';
-		} else {
-			$message = 'SDK Error: ' . $message;
-		}
+    public function __construct($message = null) {
+        if ($message == null) {
+            $message = 'Unknown SDK Error';
+        } else {
+            $message = 'SDK Error: ' . $message;
+        }
 
-		parent::__construct($message);
-	}
+        parent::__construct($message);
+    }
 }
