@@ -180,7 +180,7 @@ class EntityList implements \Iterator
      *
      */
     public function current() {
-        return $this->collection;
+        return $this->toArray();
     }
 
     /**

@@ -8,6 +8,11 @@ use LeanTesting\API\Client\PHPClient as LeanTestingClient;
 $LT = new LeanTestingClient();
 $LT->attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk');
 
+$col = $LT->projects->all(['limit' => 2]);
+foreach ($col as $c) {
+	print_r($c);
+}
+
 /* METHOD DEMONSTRATIONS */
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -167,7 +172,7 @@ $LT->attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk');
 //// List PLATFORM Devices
 // print_r( $LT->platform->types->find(1)->devices->all()->toArray() );
 
-//// Retrieve Existing  Device
+//// Retrieve Existing Device
 // print_r( $LT->platform->devices->find(11)->data );
 
 
