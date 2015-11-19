@@ -62,8 +62,14 @@ final class PHPClient
      *
      * @param string $access_token the string of the token to be attached
      *
+     * @throws SDKInvalidArgException if provided $access_token param is not a string
+     *
      */
     public function attachToken($access_token) {
+        if (!is_string($access_token)) {
+            throw new SDKInvalidArgException('`$access_token` must be a string');
+        }
+
         $this->access_token = $access_token;
     }
 }

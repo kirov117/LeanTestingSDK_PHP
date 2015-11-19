@@ -149,7 +149,7 @@ class EntityHandler
 
         foreach ($array as $k => $v) {
             if (in_array($k, $sall)) {
-                ++$socc[$k];
+                $socc[$k]++;
             } else {
                 array_push($unsup, $k);
             }
