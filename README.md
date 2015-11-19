@@ -10,35 +10,45 @@
 require 'LeanTestingSDK_PHP/PHPClient.php';
 ```
 
-//// Creating A New INSTANCE
-// $LT = new LeanTestingClient();
+- Creating a new instance
+```php
+$LT = new LeanTestingClient();
+```
 
-/////////////////////////////////////////////////////////////////////////////////////
+~~/////////////////////////////////////////////////////////////////////////////////////~~
 
-//// Get Current TOKEN
-// print_r( $LT->getCurrentToken() )
+- Get Current **Token**
+```php
+$LT->getCurrentToken()
+```php
 
-//// Attach New TOKEN
-// $LT->attachToken('9ErdKZXpGPnvHuJ9di92eAFqrp14GKvfHMyclGGh');
+- Attach New **Token**
+```php
+$LT->attachToken('9ErdKZXpGPnvHuJ9di92eAFqrp14GKvfHMyclGGh');
+```php
 
-//// Generate Authorization URL
-// $generated_URL = $LT->auth->generateAuthLink(
-// 	'DHxaSvtplj1Xos4vb7dwGKkXRu0GJmd5Rdha2HHx',
-// 	'https://www.example.com/appurl/',
-// 	'admin',
-// 	'a3ahdh2iqhdasdasfdjahf26'
-// );
-// print_r($generated_URL);
+- Generate **Authorization URL**
+```php
+$generated_URL = $LT->auth->generateAuthLink(
+	'DHxaSvtplj1Xos4vb7dwGKkXRu0GJmd5Rdha2HHx',
+	'https://www.example.com/appurl/',
+	'admin',
+	'a3ahdh2iqhdasdasfdjahf26'
+);
+print_r( $generated_URL );
+```
 
-//// Exchange Authorization Code For Access TOKEN
-// $token = $LT->auth->exchangeAuthCode(
-// 	'RBxaSvtplj1Xos4vbEbwGKkXRu0GJmd5Rdha2HHa',
-// 	'FpOZxNbe9VEwVbjUINoAepOhgS8FNQsOkpE4CtPO',
-// 	'authorization_code',
-// 	'sOgY2DT47B2K0bqashnk0E6wUaYgbbspwdy9kGrk',
-// 	'https://www.example.com/appurl/'
-// );
-// print_r( $token );
+- Exchange Authorization Code For **Access TOKEN**
+```php
+$token = $LT->auth->exchangeAuthCode(
+	'RBxaSvtplj1Xos4vbEbwGKkXRu0GJmd5Rdha2HHa',
+	'FpOZxNbe9VEwVbjUINoAepOhgS8FNQsOkpE4CtPO',
+	'authorization_code',
+	'sOgY2DT47B2K0bqashnk0E6wUaYgbbspwdy9kGrk',
+	'https://www.example.com/appurl/'
+);
+print_r( $token );
+```
 
 /////////////////////////////////////////////////////////////////////////////////////
 
