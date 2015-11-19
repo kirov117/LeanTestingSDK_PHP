@@ -1,9 +1,9 @@
 # LeanTestingSDK_PHP
-#####*Lean Testing PHP Client Library*
+####*Lean Testing PHP Client Library*
 
-[Adheres to Lean Testing API](https://leantesting.com/en/api-docs)
+[Uses the Lean Testing API](https://leantesting.com/en/api-docs)
 
-/////////////////////////////////////////////////////////////////////////////////////
+~~/////////////////////////////////////////////////////////////////////////////////////~~
 
 *Including Lean Testing PHP SDK*
 ```php
