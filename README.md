@@ -264,3 +264,38 @@ $LT->platform->browsers->find(1)->versions->all()->toArray()
 ```
 
 ######~~/////////////////////////////////////////////////////////////////////////////////////~~
+
+- Using **Filters**
+```php
+$LT->projects->find(3515)->bugs->all(['limit' => 2, 'page' => 5]).toArray();
+```
+
+- **Entity List** Functions
+```php
+$browsers = $LT->platform->browsers->all()
+echo $browsers->total()
+echo $browsers->totalPages()
+echo $browsers->count()
+echo $browsers->toArray()
+```
+
+- **Entity List** Iterator
+```php
+$comments = $LT->bugs->find(38483)->comments->all(['limit' => 1]);
+foreach ($comments as $page) {
+	print_r( $page );
+}
+```
+
+- **Entity List** Manual Iteration
+```php
+$comments = $LT->bugs->find(38483)->comments->all(['limit' => 1]);
+echo $comments->toArray();
+
+$comments->next();      echo $comments->toArray();
+$comments->last();      echo $comments->toArray();
+$comments->previous();  echo $comments->toArray();
+$comments->first();     echo $comments->toArray();
+```
+
+######~~/////////////////////////////////////////////////////////////////////////////////////~~
