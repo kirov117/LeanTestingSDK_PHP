@@ -106,7 +106,7 @@ class EntityList implements \Iterator
      */
     public function first() {
         if ($this->pagination['current_page'] === 1) {
-            return;
+            return false;
         }
 
         $this->filters['page'] = 1;
@@ -121,12 +121,12 @@ class EntityList implements \Iterator
      */
     public function previous() {
         if ($this->pagination['current_page'] === 1) {
-            return;
+            return false;
         }
 
         --$this->filters['page'];
         $this->generateCollectionData();
-        --$this->real_page;
+        $this->real_page = $this->filters['page'];
     }
 
     /**
@@ -136,6 +136,11 @@ class EntityList implements \Iterator
      *
      */
     public function next() {
+        if ($this->pagination['current_page'] === $this->pagination['total_pages']) {
+            ++$this->real_page;
+            return false;
+        }
+
         if (array_key_exists('page', $this->filters)) {
             ++$this->filters['page'];
         } else {
@@ -153,7 +158,7 @@ class EntityList implements \Iterator
      */
     public function last() {
         if ($this->pagination['current_page'] === $this->pagination['total_pages']) {
-            return;
+            return false;
         }
 
         $this->filters['page'] = $this->pagination['total_pages'];
@@ -204,10 +209,16 @@ class EntityList implements \Iterator
      *
      */
     public function valid() {
-        return (
+        $test = (
             $this->real_page === $this->pagination['current_page'] &&
             $this->real_page <= $this->pagination['total_pages']
         );
+
+        if (!$test) {
+            $this->real_page = $this->pagination['total_pages'];
+        }
+
+        return $test;
     }
 
     /**

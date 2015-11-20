@@ -280,6 +280,8 @@ echo $browsers->toArray()
 ```
 
 - **Entity List** Iterator
+When used in foreach() loops, entity lists will automatically rewind, regardless of `page` filter.
+After ending the loop, the entity list will **NOT** revert to first page or the initial instancing `page` filter setting in order not to cause useless API request calls.
 ```php
 $comments = $LT->bugs->find(38483)->comments->all(['limit' => 1]);
 foreach ($comments as $page) {
@@ -292,9 +294,16 @@ foreach ($comments as $page) {
 $comments = $LT->bugs->find(38483)->comments->all(['limit' => 1]);
 echo $comments->toArray();
 
+// Will return false if unable to move forwards
 $comments->next();      echo $comments->toArray();
+
+// Will return false if already on last page
 $comments->last();      echo $comments->toArray();
+
+// Will return false if unable to move backwards
 $comments->previous();  echo $comments->toArray();
+
+// Will return false if already on first page
 $comments->first();     echo $comments->toArray();
 ```
 
