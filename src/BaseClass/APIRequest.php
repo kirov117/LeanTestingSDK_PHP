@@ -99,7 +99,9 @@ class APIRequest
      */
     public function exec() {
         if ($this->origin->debug_return != null) {
+
             $curl_data = $this->origin->debug_return;
+
         } else {
 
             $ch = curl_init();

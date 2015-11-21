@@ -14,6 +14,7 @@ class PlatformBrowsersHandler extends EntityHandler
 
     public function all($filters = []) {
         $filters = array_merge(['include' => 'versions'], $filters);
+
         parent::all($filters);
 
         $request = new APIRequest($this->origin, '/v1/platform/browsers', 'GET');

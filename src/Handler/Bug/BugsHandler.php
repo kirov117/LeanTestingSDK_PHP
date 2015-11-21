@@ -57,6 +57,7 @@ class BugsHandler extends EntityHandler
 
         if ($this->enforce($fields, $supports)) {
             $fields = array_merge(['include' => 'steps,platform'], $fields);
+
             $req = new APIRequest($this->origin, '/v1/bugs/'. $id, 'PUT', ['params' => $fields]);
             return new Bug($this->origin, $req->exec());
         }
