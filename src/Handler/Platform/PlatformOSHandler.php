@@ -13,6 +13,7 @@ class PlatformOSHandler extends EntityHandler
     private $return_class = 'LeanTesting\\API\\Client\\Entity\\Platform\\PlatformOS';
 
     public function all($filters = []) {
+        $filters = array_merge(['include' => 'versions'], $filters);
         parent::all($filters);
 
         $request = new APIRequest($this->origin, '/v1/platform/os', 'GET');
@@ -22,7 +23,7 @@ class PlatformOSHandler extends EntityHandler
     public function find($id) {
         parent::find($id);
 
-        $req = new APIRequest($this->origin, '/v1/platform/os/' . $id, 'GET');
+        $req = new APIRequest($this->origin, '/v1/platform/os/' . $id, 'GET', ['params' => ['include' => 'versions']]);
         return new PlatformOS($this->origin, $req->exec());
     }
 }

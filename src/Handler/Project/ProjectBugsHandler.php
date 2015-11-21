@@ -52,6 +52,7 @@ class ProjectBugsHandler extends EntityHandler
         }
 
         if ($this->enforce($fields, $supports)) {
+            $fields = array_merge(['include' => 'steps,platform'], $fields);
             $req = new APIRequest(
                 $this->origin,
                 '/v1/projects/' . $this->project_id . '/bugs',
@@ -64,6 +65,7 @@ class ProjectBugsHandler extends EntityHandler
     }
 
     public function all($filters = []) {
+        $filters = array_merge(['include' => 'steps,platform,attachments,comments,tags'], $filters);
         parent::all($filters);
 
         $request = new APIRequest($this->origin, '/v1/projects/' . $this->project_id . '/bugs', 'GET');

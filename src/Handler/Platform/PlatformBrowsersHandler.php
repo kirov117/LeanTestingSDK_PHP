@@ -13,6 +13,7 @@ class PlatformBrowsersHandler extends EntityHandler
     private $return_class = 'LeanTesting\\API\\Client\\Entity\\Platform\\PlatformBrowser';
 
     public function all($filters = []) {
+        $filters = array_merge(['include' => 'versions'], $filters);
         parent::all($filters);
 
         $request = new APIRequest($this->origin, '/v1/platform/browsers', 'GET');
@@ -22,7 +23,7 @@ class PlatformBrowsersHandler extends EntityHandler
     public function find($id) {
         parent::find($id);
 
-        $req = new APIRequest($this->origin, '/v1/platform/browsers/' . $id, 'GET');
+        $req = new APIRequest($this->origin, '/v1/platform/browsers/' . $id, 'GET', ['params' => ['include' => 'versions']]);
         return new PlatformBrowser($this->origin, $req->exec());
     }
 }

@@ -12,7 +12,16 @@ class BugsHandler extends EntityHandler
     public function find($id) {
         parent::find($id);
 
-        $req = new APIRequest($this->origin, '/v1/bugs/' . $id, 'GET');
+        $req = new APIRequest(
+            $this->origin,
+            '/v1/bugs/' . $id,
+            'GET',
+            [
+                'params' => [
+                    'include' => 'steps,platform,attachments,comments,tags'
+                ]
+            ]
+        );
         return new Bug($this->origin, $req->exec());
     }
 
@@ -47,6 +56,7 @@ class BugsHandler extends EntityHandler
         ];
 
         if ($this->enforce($fields, $supports)) {
+            $fields = array_merge(['include' => 'steps,platform'], $fields);
             $req = new APIRequest($this->origin, '/v1/bugs/'. $id, 'PUT', ['params' => $fields]);
             return new Bug($this->origin, $req->exec());
         }
