@@ -1,6 +1,12 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\BaseClass;
+
+use LeanTesting\API\Client\PHPClient;
+
+use LeanTesting\API\Client\BaseClass\APIRequest;
+
+use LeanTesting\API\Client\Exception\SDKUnexpectedResponseException;
 
 /**
  *
@@ -87,7 +93,7 @@ class EntityList implements \Iterator
     public function __construct(PHPClient $origin, APIRequest $request, $identifier, $filters = []) {
         $this->origin     = $origin;
         $this->request    = $request;
-        $this->identifier = __NAMESPACE__ . '\\' . $identifier; // Assigning current namespace for correct instancing
+        $this->identifier = $identifier; // Assigning current namespace for correct instancing
         $this->filters    = $filters;
 
         if (array_key_exists('page', $filters)) {

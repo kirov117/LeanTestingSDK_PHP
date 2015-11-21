@@ -1,6 +1,8 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Exception;
+
+use LeanTesting\API\Client\Exception\BaseException\SDKException;
 
 class SDKMissingArgException extends SDKException
 {

@@ -1,6 +1,13 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\BaseClass;
+
+use LeanTesting\API\Client\PHPClient;
+
+use LeanTesting\API\Client\Exception\SDKInvalidArgException;
+use LeanTesting\API\Client\Exception\SDKUnsupportedRequestException;
+use LeanTesting\API\Client\Exception\SDKIncompleteRequestException;
+use LeanTesting\API\Client\Exception\SDKDuplicateRequestException;
 
 /**
  *

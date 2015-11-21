@@ -2,6 +2,15 @@
 
 namespace LeanTesting\API\Client;
 
+use LeanTesting\API\Client\Exception\SDKInvalidArgException;
+
+use LeanTesting\API\Client\Handler\Auth\OAuth2Handler;
+use LeanTesting\API\Client\Handler\User\UserHandler;
+use LeanTesting\API\Client\Handler\Project\ProjectsHandler;
+use LeanTesting\API\Client\Handler\Bug\BugsHandler;
+use LeanTesting\API\Client\Handler\Attachment\AttachmentsHandler;
+use LeanTesting\API\Client\Handler\Platform\PlatformHandler;
+
 define('REQUIRED', 1);
 define('OPTIONAL', 0);
 

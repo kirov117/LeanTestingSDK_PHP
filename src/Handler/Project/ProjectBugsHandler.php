@@ -1,9 +1,17 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Handler\Project;
+
+use LeanTesting\API\Client\BaseClass\APIRequest;
+use LeanTesting\API\Client\BaseClass\EntityHandler;
+use LeanTesting\API\Client\BaseClass\EntityList;
+
+use LeanTesting\API\Client\Entity\Bug\Bug;
 
 class ProjectBugsHandler extends EntityHandler
 {
+    private $return_class = 'LeanTesting\\API\\Client\\Entity\\Bug\\Bug';
+
     protected $project_id;
 
     public function __construct($origin, $project_id) {
@@ -59,6 +67,6 @@ class ProjectBugsHandler extends EntityHandler
         parent::all($filters);
 
         $request = new APIRequest($this->origin, '/v1/projects/' . $this->project_id . '/bugs', 'GET');
-        return new EntityList($this->origin, $request, 'Bug', $filters);
+        return new EntityList($this->origin, $request, $this->return_class, $filters);
     }
 }

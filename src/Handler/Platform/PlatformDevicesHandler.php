@@ -1,6 +1,11 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Handler\Platform;
+
+use LeanTesting\API\Client\BaseClass\APIRequest;
+use LeanTesting\API\Client\BaseClass\EntityHandler;
+
+use LeanTesting\API\Client\Entity\Platform\PlatformDevice;
 
 class PlatformDevicesHandler extends EntityHandler
 {

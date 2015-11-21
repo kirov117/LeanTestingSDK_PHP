@@ -1,6 +1,8 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Entity\User;
+
+use LeanTesting\API\Client\BaseClass\Entity;
 
 class UserOrganization extends Entity
 {

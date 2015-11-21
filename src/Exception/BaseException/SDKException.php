@@ -1,6 +1,6 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Exception\BaseException;
 
 class SDKException extends \Exception
 {

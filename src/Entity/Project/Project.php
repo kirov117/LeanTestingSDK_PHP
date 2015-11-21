@@ -1,6 +1,19 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Entity\Project;
+
+use LeanTesting\API\Client\BaseClass\Entity;
+
+use LeanTesting\API\Client\Handler\Project\ProjectSectionsHandler;
+use LeanTesting\API\Client\Handler\Project\ProjectVersionsHandler;
+use LeanTesting\API\Client\Handler\Project\ProjectUsersHandler;
+
+use LeanTesting\API\Client\Handler\Project\ProjectBugTypeSchemeHandler;
+use LeanTesting\API\Client\Handler\Project\ProjectBugStatusSchemeHandler;
+use LeanTesting\API\Client\Handler\Project\ProjectBugSeveritySchemeHandler;
+use LeanTesting\API\Client\Handler\Project\ProjectBugReproducibilitySchemeHandler;
+
+use LeanTesting\API\Client\Handler\Project\ProjectBugsHandler;
 
 class Project extends Entity
 {

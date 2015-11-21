@@ -1,6 +1,9 @@
 .old
 runtime.php
 
+vendor
+composer.lock
+
 src/.old
 src/loader.php
 src/common.php

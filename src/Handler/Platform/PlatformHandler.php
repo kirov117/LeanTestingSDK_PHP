@@ -1,6 +1,10 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Handler\Platform;
+
+use LeanTesting\API\Client\PHPClient;
+
+use LeanTesting\API\Client\BaseClass\EntityHandler;
 
 class PlatformHandler extends EntityHandler
 {

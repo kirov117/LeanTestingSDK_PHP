@@ -1,6 +1,13 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Entity\Bug;
+
+use LeanTesting\API\Client\BaseClass\Entity;
+
+use LeanTesting\API\Client\Handler\Bug\BugCommentsHandler;
+use LeanTesting\API\Client\Handler\Bug\BugAttachmentsHandler;
+
+
 
 class Bug extends Entity
 {

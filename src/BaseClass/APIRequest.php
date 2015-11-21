@@ -1,6 +1,12 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\BaseClass;
+
+use LeanTesting\API\Client\PHPClient;
+
+use LeanTesting\API\Client\Exception\SDKInvalidArgException;
+use LeanTesting\API\Client\Exception\SDKErrorResponseException;
+use LeanTesting\API\Client\Exception\SDKBadJSONResponseException;
 
 /**
  *

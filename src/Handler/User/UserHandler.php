@@ -1,6 +1,11 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Handler\User;
+
+use LeanTesting\API\Client\PHPClient;
+
+use LeanTesting\API\Client\BaseClass\APIRequest;
+use LeanTesting\API\Client\BaseClass\EntityHandler;
 
 class UserHandler extends EntityHandler
 {

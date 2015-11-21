@@ -1,6 +1,8 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Entity\Platform;
+
+use LeanTesting\API\Client\BaseClass\Entity;
 
 class PlatformOSVersion extends Entity
 {

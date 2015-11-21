@@ -1,6 +1,8 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Entity\Bug;
+
+use LeanTesting\API\Client\BaseClass\Entity;
 
 class BugAttachment extends Entity
 {

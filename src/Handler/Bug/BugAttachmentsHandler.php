@@ -1,9 +1,19 @@
 <?php
 
-namespace LeanTesting\API\Client;
+namespace LeanTesting\API\Client\Handler\Bug;
+
+use LeanTesting\API\Client\BaseClass\APIRequest;
+use LeanTesting\API\Client\BaseClass\EntityHandler;
+use LeanTesting\API\Client\BaseClass\EntityList;
+
+use LeanTesting\API\Client\Exception\SDKInvalidArgException;
+
+use LeanTesting\API\Client\Entity\Bug\BugAttachment;
 
 class BugAttachmentsHandler extends EntityHandler
 {
+    private $return_class = 'LeanTesting\\API\\Client\\Entity\\Bug\\BugAttachment';
+
     protected $bug_id;
 
     public function __construct($origin, $bug_id) {
@@ -79,6 +89,6 @@ class BugAttachmentsHandler extends EntityHandler
         parent::all($filters);
 
         $request = new APIRequest($this->origin, '/v1/bugs/' . $this->bug_id . '/attachments', 'GET');
-        return new EntityList($this->origin, $request, 'BugAttachment', $filters);
+        return new EntityList($this->origin, $request, $this->return_class, $filters);
     }
 }
