@@ -32,7 +32,7 @@ final class PHPClient
     public $attachments;
     public $platform;
 
-    public $wat;
+    public $debug_return = null;
 
     public function __construct() {
         $this->auth        =  new OAuth2Handler($this);

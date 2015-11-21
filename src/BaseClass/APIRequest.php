@@ -98,63 +98,69 @@ class APIRequest
      *
      */
     public function exec() {
-        $ch = curl_init();
+        if ($this->origin->debug_return != null) {
+            $curl_data = $this->origin->debug_return;
+        } else {
 
-        $curl_headers = [];
+            $ch = curl_init();
 
-        $call_url = $this->opts['base_uri'] . $this->endpoint;
+            $curl_headers = [];
 
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
+            $call_url = $this->opts['base_uri'] . $this->endpoint;
 
-        switch ($this->method) { // Method-oriented parsing
-            case 'GET':
-                $expected_http_status = 200;
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
 
-                $call_url .= '?' . http_build_query($this->opts['params']);
+            switch ($this->method) { // Method-oriented parsing
+                case 'GET':
+                    $expected_http_status = 200;
 
-                break;
-            case 'POST':
-            case 'PUT':
-                $expected_http_status = 200;
+                    $call_url .= '?' . http_build_query($this->opts['params']);
 
-                if ($this->opts['form_data'] === true) {
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $this->opts['params']);
+                    break;
+                case 'POST':
+                case 'PUT':
+                    $expected_http_status = 200;
 
-                    array_push($curl_headers, 'Content-Type: multipart/form-data');
-                } else {
-                    $json_data = json_encode($this->opts['params']);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+                    if ($this->opts['form_data'] === true) {
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->opts['params']);
 
-                    array_push($curl_headers, 'Content-Type: application/json');
-                    array_push($curl_headers, 'Content-Length: ' . strlen($json_data));
-                }
+                        array_push($curl_headers, 'Content-Type: multipart/form-data');
+                    } else {
+                        $json_data = json_encode($this->opts['params']);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
 
-                break;
-            case 'DELETE':
-                $expected_http_status = 204;
+                        array_push($curl_headers, 'Content-Type: application/json');
+                        array_push($curl_headers, 'Content-Length: ' . strlen($json_data));
+                    }
 
-                break;
+                    break;
+                case 'DELETE':
+                    $expected_http_status = 204;
+
+                    break;
+            }
+
+            if (is_string($this->origin->getCurrentToken())) {
+                array_push($curl_headers, 'Authorization: Bearer ' . $this->origin->getCurrentToken());
+            }
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $curl_headers);
+            curl_setopt($ch, CURLOPT_URL, $call_url);
+
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $curl_data = curl_exec($ch);
+            $curl_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+            if ($curl_status !== $expected_http_status) {
+                throw new SDKErrorResponseException($curl_data);
+            }
+
+            curl_close($ch);
+            $ch = null;
+
         }
-
-        if (is_string($this->origin->getCurrentToken())) {
-            array_push($curl_headers, 'Authorization: Bearer ' . $this->origin->getCurrentToken());
-        }
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $curl_headers);
-        curl_setopt($ch, CURLOPT_URL, $call_url);
-
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $curl_data = curl_exec($ch);
-        $curl_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        if ($curl_status !== $expected_http_status) {
-            throw new SDKErrorResponseException($curl_data);
-        }
-
-        curl_close($ch);
-        $ch = null;
 
         if ($this->method === 'DELETE') {           // if DELETE request, expect no output
             return true;

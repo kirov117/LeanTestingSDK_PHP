@@ -93,7 +93,7 @@ class EntityList implements \Iterator
     public function __construct(PHPClient $origin, APIRequest $request, $identifier, $filters = []) {
         $this->origin     = $origin;
         $this->request    = $request;
-        $this->identifier = $identifier; // Assigning current namespace for correct instancing
+        $this->identifier = $identifier;
         $this->filters    = $filters;
 
         if (array_key_exists('page', $filters)) {
