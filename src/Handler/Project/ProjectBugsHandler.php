@@ -66,9 +66,9 @@ class ProjectBugsHandler extends EntityHandler
     }
 
     public function all($filters = []) {
-        $filters = array_merge(['include' => 'steps,platform,attachments,comments,tags'], $filters);
-
         parent::all($filters);
+
+        $filters = array_merge(['include' => 'steps,platform,attachments,comments,tags'], $filters);
 
         $request = new APIRequest($this->origin, '/v1/projects/' . $this->project_id . '/bugs', 'GET');
         return new EntityList($this->origin, $request, $this->return_class, $filters);

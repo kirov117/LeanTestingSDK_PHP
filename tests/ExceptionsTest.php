@@ -17,193 +17,58 @@ use LeanTesting\API\Client\Exception\SDKUnsupportedRequestException;
 class ExceptionsTest extends \PHPUnit_Framework_TestCase
 {
 
-    /* SELF TYPE */
-    public function testBaseSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\BaseException\SDKException', new SDKException);
+    private $exception_colllection = [
+        ['LeanTesting\API\Client\Exception\BaseException\SDKException'],
+        ['LeanTesting\API\Client\Exception\SDKBadJSONResponseException'],
+        ['LeanTesting\API\Client\Exception\SDKDuplicateRequestException'],
+        ['LeanTesting\API\Client\Exception\SDKErrorResponseException'],
+        ['LeanTesting\API\Client\Exception\SDKIncompleteRequestException'],
+        ['LeanTesting\API\Client\Exception\SDKInvalidArgException'],
+        ['LeanTesting\API\Client\Exception\SDKMissingArgException'],
+        ['LeanTesting\API\Client\Exception\SDKUnexpectedResponseException'],
+        ['LeanTesting\API\Client\Exception\SDKUnsupportedRequestException']
+    ];
+
+    public function testExceptionsDefined() {
+        foreach ($this->exception_colllection as $e) {
+            $this->assertTrue(class_exists($e[0]));
+        }
     }
-    public function testBadJSONResponseSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKBadJSONResponseException', new SDKBadJSONResponseException);
+
+    public function testExceptionsRaiseNoArgs() {
+        foreach ($this->exception_colllection as $e) {
+            try {
+                throw new $e[0]();
+                $this->fail('No exception thrown. Expected ' . $e[0]);
+            } catch(\Exception $ex) {
+                if (get_class($ex) !== $e[0]) {
+                    $this->fail('Unexpected exception received. Expected ' . $e[0]);
+                }
+                if (strpos($ex->getMessage(), 'SDK Error') === false) {
+                    $this->fail('Unexpected exception message for ' . $e[0]);
+                }
+            }
+        }
     }
-    public function testDuplicateRequestSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKDuplicateRequestException', new SDKDuplicateRequestException);
+
+    public function testExceptionsRaiseWithStr() {
+        foreach ($this->exception_colllection as $e) {
+            try {
+                throw new $e[0]('XXXmsgXXX');
+                $this->fail('No exception thrown. Expected ' . $e[0]);
+            } catch(\Exception $ex) {
+                if (get_class($ex) !== $e[0]) {
+                    $this->fail('Unexpected exception received. Expected ' . $e[0]);
+                }
+                if (strpos($ex->getMessage(), 'XXXmsgXXX') === false) {
+                    $this->fail('Unexpected exception message for ' . $e[0]);
+                }
+            }
+        }
     }
-    public function testErrorResponseSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKErrorResponseException', new SDKErrorResponseException);
-    }
-    public function testIncompleteRequestSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKIncompleteRequestException', new SDKIncompleteRequestException);
-    }
-    public function testInvalidArgSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKInvalidArgException', new SDKInvalidArgException);
-    }
-    public function testMissingArgSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKMissingArgException', new SDKMissingArgException);
-    }
-    public function testUnexpectedResponseSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKUnexpectedResponseException', new SDKUnexpectedResponseException);
-    }
-    public function testUnsupportedRequestSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Exception\SDKUnsupportedRequestException', new SDKUnsupportedRequestException);
-    }
-    /* END SELF TYPE */
 
 
-
-
-
-
-
-
-
-    /* RAISE NO ARGS */
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\BaseException\SDKException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testBaseRaiseNoArgs() {
-        throw new SDKException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKBadJSONResponseException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testBadJSONResponseRaiseNoArgs() {
-        throw new SDKBadJSONResponseException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKDuplicateRequestException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testDuplicateRequestRaiseNoArgs() {
-        throw new SDKDuplicateRequestException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKErrorResponseException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testErrorResponseRaiseNoArgs() {
-        throw new SDKErrorResponseException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKIncompleteRequestException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testIncompleteRequestRaiseNoArgs() {
-        throw new SDKIncompleteRequestException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testInvalidArgRaiseNoArgs() {
-        throw new SDKInvalidArgException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKMissingArgException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testMissingArgRaiseNoArgs() {
-        throw new SDKMissingArgException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKUnexpectedResponseException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testUnexpectedResponseRaiseNoArgs() {
-        throw new SDKUnexpectedResponseException();
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKUnsupportedRequestException
-     * @expectedExceptionMessage SDK Error
-     */
-    public function testUnsupportedRequestRaiseNoArgs() {
-        throw new SDKUnsupportedRequestException();
-    }
-    /* END RAISE NO ARGS */
-
-
-
-
-
-
-
-
-
-    /* RAISE WITH STR */
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\BaseException\SDKException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testBaseRaiseWithStr() {
-        throw new SDKException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKBadJSONResponseException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testBadJSONResponseRaiseWithStr() {
-        throw new SDKBadJSONResponseException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKDuplicateRequestException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testDuplicateRequestRaiseWithStr() {
-        throw new SDKDuplicateRequestException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKErrorResponseException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testErrorResponseRaiseWithStr() {
-        throw new SDKErrorResponseException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKIncompleteRequestException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testIncompleteRequestRaiseWithStr() {
-        throw new SDKIncompleteRequestException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testInvalidArgRaiseWithStr() {
-        throw new SDKInvalidArgException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKMissingArgException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testMissingArgRaiseWithStr() {
-        throw new SDKMissingArgException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKUnexpectedResponseException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testUnexpectedResponseRaiseWithStr() {
-        throw new SDKUnexpectedResponseException('XXXmsgXXX');
-    }
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKUnsupportedRequestException
-     * @expectedExceptionMessage XXXmsgXXX
-     */
-    public function testUnsupportedRequestRaiseWithStr() {
-        throw new SDKUnsupportedRequestException('XXXmsgXXX');
-    }
-    /* END RAISE WITH STR */
-
-
-
-
-
-
-
-
-
-    /* RAISE WITH ARR */
+    /* RAISE WITH ARR (when supported) */
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKDuplicateRequestException
      * @expectedExceptionMessage xx, yy, zz
@@ -225,6 +90,6 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
     public function testUnsupportedRequestRaiseWithArr() {
         throw new SDKUnsupportedRequestException(['xx', 'yy', 'zz']);
     }
-    /* END WITH ARR */
+    /* END RAISE WITH ARR */
 
 }

@@ -438,7 +438,7 @@ class RequestsTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('url', $atc[0]);
     }
     public function testCreateNewAttachment() {
-        $_fp = __DIR__ . '/res/upload_sample.jpg';
+        $_fp = __DIR__ . '/../res/upload_sample.jpg';
 
         $new_attachment = $this->client->bugs->find($this->sample_bug_id)->attachments->upload($_fp);
 

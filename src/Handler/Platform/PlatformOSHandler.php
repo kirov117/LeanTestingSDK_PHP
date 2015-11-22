@@ -13,9 +13,9 @@ class PlatformOSHandler extends EntityHandler
     private $return_class = 'LeanTesting\\API\\Client\\Entity\\Platform\\PlatformOS';
 
     public function all($filters = []) {
-        $filters = array_merge(['include' => 'versions'], $filters);
-
         parent::all($filters);
+
+        $filters = array_merge(['include' => 'versions'], $filters);
 
         $request = new APIRequest($this->origin, '/v1/platform/os', 'GET');
         return new EntityList($this->origin, $request, $this->return_class, $filters);

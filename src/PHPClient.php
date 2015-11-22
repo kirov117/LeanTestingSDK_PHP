@@ -32,8 +32,6 @@ final class PHPClient
     public $attachments;
     public $platform;
 
-    public $debug_return = null;
-
     public function __construct() {
         $this->auth        =  new OAuth2Handler($this);
         $this->user        =  new UserHandler($this);

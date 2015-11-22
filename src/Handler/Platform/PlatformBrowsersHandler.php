@@ -13,9 +13,9 @@ class PlatformBrowsersHandler extends EntityHandler
     private $return_class = 'LeanTesting\\API\\Client\\Entity\\Platform\\PlatformBrowser';
 
     public function all($filters = []) {
-        $filters = array_merge(['include' => 'versions'], $filters);
-
         parent::all($filters);
+
+        $filters = array_merge(['include' => 'versions'], $filters);
 
         $request = new APIRequest($this->origin, '/v1/platform/browsers', 'GET');
         return new EntityList($this->origin, $request, $this->return_class, $filters);

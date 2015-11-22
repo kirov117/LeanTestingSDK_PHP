@@ -12,9 +12,6 @@ class OAuth2HandlerTest extends \PHPUnit_Framework_TestCase
     public function testOAuth2HandlerDefined() {
         $this->assertTrue(class_exists('LeanTesting\API\Client\Handler\Auth\OAuth2Handler'));
     }
-    public function testOAuth2HandlerSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\Handler\Auth\OAuth2Handler', new OAuth2Handler(new PHPClient));
-    }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
      */

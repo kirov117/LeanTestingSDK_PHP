@@ -14,9 +14,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
 
 
-    public function testClientSelfType() {
-        $this->assertInstanceOf('LeanTesting\API\Client\PHPClient', new PHPClient);
-    }
     public function testClientHasAuthObj() {
         $this->assertInstanceOf('LeanTesting\API\Client\Handler\Auth\OAuth2Handler', (new PHPClient)->auth);
     }
