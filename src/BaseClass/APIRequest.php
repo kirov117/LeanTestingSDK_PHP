@@ -152,9 +152,18 @@ class APIRequest
      *
      */
     public function exec() {
-        $call = $this->call();
-        $curl_data = $call['data'];
-        $curl_status = $call['status'];
+        if ($this->origin->debug_return != null &&
+            array_key_exists('data', $this->origin->debug_return) &&
+            array_key_exists('status', $this->origin->debug_return)) {
+
+            $curl_data = $this->origin->debug_return['data'];
+            $curl_status = $this->origin->debug_return['status'];
+
+        } else {
+            $call = $this->call();
+            $curl_data = $call['data'];
+            $curl_status = $call['status'];
+        }
 
         if ($this->method === 'DELETE') {
             $expected_http_status = 204;

@@ -25,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LeanTesting\\API\\Client\\Test\\": "test"
+            "LeanTesting\\API\\Client\\Test\\": "tests"
         }
     }
 }

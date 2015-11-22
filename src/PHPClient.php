@@ -32,6 +32,8 @@ final class PHPClient
     public $attachments;
     public $platform;
 
+    public $debug_return = null;
+
     public function __construct() {
         $this->auth        =  new OAuth2Handler($this);
         $this->user        =  new UserHandler($this);
@@ -39,6 +41,10 @@ final class PHPClient
         $this->bugs        =  new BugsHandler($this);
         $this->attachments =  new AttachmentsHandler($this);
         $this->platform    =  new PlatformHandler($this);
+    }
+
+    public function dododo($cls) {
+        print_r(new $cls);
     }
 
     /**
