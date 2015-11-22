@@ -679,6 +679,14 @@ class RequestsTest extends \PHPUnit_Framework_TestCase
         $this->client->attachToken('6cOb1uNIMFyyJQdK33N9lxjECw5AJom1L3xxxxxx');
         $this->client->projects->find($this->sample_project_id)->versions->create(['number' => 'v1.0']);
     }
+    /**
+     * @expectedException LeanTesting\API\Client\Exception\SDKErrorResponseException
+     * @expectedExceptionMessage access token
+     */
+    public function testNoToken() {
+        $cl = new PHPClient;
+        $cl->projects->find($this->sample_project_id)->versions->create(['number' => 'v1.0']);
+    }
     /* END MISC */
 
 }

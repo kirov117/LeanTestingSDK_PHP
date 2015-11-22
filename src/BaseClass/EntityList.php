@@ -25,13 +25,14 @@ class EntityList implements \Iterator
     protected $origin;     // Reference to originating Client instance
 
     protected $identifier; // Class name identifier for the collection Entities
-    protected $collection; // Internal collection corresponding to current page
 
     protected $request;    // APIRequest definition to use for collection generation
     protected $filters;    // Filter list for generation (origins in Handler call)
 
     protected $pagination; // Pagination object as per response (without links)
     protected $real_page;  // Effective virtual paginator for out-of-bounds scenarios
+
+    public $collection;    // Internal collection corresponding to current page
 
     /**
      *

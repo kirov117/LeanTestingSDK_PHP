@@ -64,6 +64,12 @@ class EntitiesTest extends \PHPUnit_Framework_TestCase
         ['LeanTesting\API\Client\Entity\User\UserOrganization']
     ];
 
+    public function testEntitiesCorrectParent() {
+        foreach ($this->entity_colllection as $e) {
+            $this->assertInstanceOf('LeanTesting\API\Client\BaseClass\Entity', new $e[0](new PHPClient, ['id' => 1]));
+        }
+    }
+
     public function testEntitiesDefined() {
         foreach ($this->entity_colllection as $e) {
             $this->assertTrue(class_exists($e[0]));
@@ -71,7 +77,7 @@ class EntitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testEntitiesDataParsing() {
-        $data = ['id' => 1];
+        $data = ['id' => 1, 'YY' => 'strstr', 'FF' => [1, 2, 3, 'asdasdasd'], 'GG' => ['test1' => true, 'test2' => []]];
         foreach ($this->entity_colllection as $e) {
             $this->assertSame((new $e[0](new PHPClient, $data))->data, $data);
         }
