@@ -85,6 +85,13 @@ class APIRequest
         $this->opts = array_merge($this->opts, $opts);
     }
 
+    /**
+     *
+     * Executes cURL call as per current API definition state.
+     *
+     * @return mixed Returns resulting data response from server (including errors and inconsistencies)
+     *
+     */
     public function call() {
         $ch = curl_init();
 
@@ -140,7 +147,7 @@ class APIRequest
 
     /**
      *
-     * Executes cURL call as per current API definition state.
+     * Does cURL data interpretation
      *
      * @throws SDKErrorResponseException   if the remote response is an error.
      *         A server response is interpreted as an error if obtained status code differs from expected status code.
