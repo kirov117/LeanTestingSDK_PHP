@@ -30,7 +30,6 @@ class RequestsTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp() {
         $this->client = new PHPClient;
-
         $this->client->attachToken('6cOb1uNIMFyyJQdK33N9lxjECw5AJom1L3iKcVPw');
     }
 
@@ -334,32 +333,25 @@ class RequestsTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('description', $bug);
         $this->assertArrayHasKey('expected_results', $bug);
     }
-    /**
-     * @depends testCreateNewBug
-     */
-    public function testUpdateBug($test_bug_id) {
-        $this->test_bug_id = $test_bug_id;
-
+    public function testUpdateBug() {
         $_title = 'Upddssszz';
         $_status_id = 1;
         $_severity_id = 1;
         $_project_version_id = 10242;
         $_project_section_id = 12675;
         $_type_id = 3;
-        $_reproducibility_id = 1;
         $_assigned_user_id = 4650;
         $_description = 'NJSDESCR';
         $_expected_results = 'NJSXEXPR';
 
 
-        $updated_bug = $this->client->projects->find($this->sample_project_id)->bugs->create([
+        $updated_bug = $this->client->bugs->update($this->sample_bug_id, [
             'title' => $_title,
             'status_id' => $_status_id,
             'severity_id' => $_severity_id,
             'project_version_id' => $_project_version_id,
             'project_section_id' => $_project_section_id,
             'type_id' => $_type_id,
-            'reproducibility_id' => $_reproducibility_id,
             'assigned_user_id' => $_assigned_user_id,
             'description' => $_description,
             'expected_results' => $_expected_results
@@ -376,7 +368,6 @@ class RequestsTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('project_version_id', $data);
         $this->assertArrayHasKey('project_section_id', $data);
         $this->assertArrayHasKey('type_id', $data);
-        $this->assertArrayHasKey('reproducibility_id', $data);
         $this->assertArrayHasKey('assigned_user_id', $data);
         $this->assertArrayHasKey('description', $data);
         $this->assertArrayHasKey('expected_results', $data);
@@ -387,15 +378,12 @@ class RequestsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($_project_version_id, $data['project_version_id']);
         $this->assertEquals($_project_section_id, $data['project_section_id']);
         $this->assertEquals($_type_id, $data['type_id']);
-        $this->assertEquals($_reproducibility_id, $data['reproducibility_id']);
         $this->assertEquals($_assigned_user_id, $data['assigned_user_id']);
         $this->assertEquals($_description, $data['description']);
         $this->assertEquals($_expected_results, $data['expected_results']);
-
-        return $this->test_bug_id;
     }
     /**
-     * @depends testUpdateBug
+     * @depends testCreateNewBug
      */
     public function testDeleteBug($test_bug_id) {
         $this->test_bug_id = $test_bug_id;
