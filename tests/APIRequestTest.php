@@ -19,31 +19,31 @@ class APIRequestTest extends \PHPUnit_Framework_TestCase
      * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
      */
     public function testAPIRequestInstanceNonStrEndpoint() {
-        $req = new APIRequest(new PHPClient, 12751, 'GET');
+        new APIRequest(new PHPClient, 12751, 'GET');
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
      */
     public function testAPIRequestInstanceNonStrMethod() {
-        $req = new APIRequest(new PHPClient, '/', 131231);
+        new APIRequest(new PHPClient, '/', 131231);
     }
     public function testAPIRequestInstanceSupportedMethod() {
-        $req = new APIRequest(new PHPClient, '/', 'GET');
-        $req = new APIRequest(new PHPClient, '/', 'POST');
-        $req = new APIRequest(new PHPClient, '/', 'PUT');
-        $req = new APIRequest(new PHPClient, '/', 'DELETE');
+        new APIRequest(new PHPClient, '/', 'GET');
+        new APIRequest(new PHPClient, '/', 'POST');
+        new APIRequest(new PHPClient, '/', 'PUT');
+        new APIRequest(new PHPClient, '/', 'DELETE');
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
      */
     public function testAPIRequestInstanceNonSupportedMethod() {
-        $req = new APIRequest(new PHPClient, '/', 'XXX');
+        new APIRequest(new PHPClient, '/', 'XXX');
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
      */
     public function testAPIRequestInstanceNonArrOpts() {
-        $req = new APIRequest(new PHPClient, '/', 'GET', 111223);
+        new APIRequest(new PHPClient, '/', 'GET', 111223);
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKBadJSONResponseException

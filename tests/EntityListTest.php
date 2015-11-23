@@ -17,53 +17,49 @@ class EntityListTest extends \PHPUnit_Framework_TestCase
     public function testEntityListDefined() {
         $this->assertTrue(class_exists('LeanTesting\API\Client\BaseClass\EntityList'));
     }
+
+
+
+
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKUnexpectedResponseException
      * @expectedExceptionMessage meta
      */
     public function testEntityListBadRespMissingMeta() {
-        $client = new PHPClient;
-
         $mock = \Mockery::mock('LeanTesting\API\Client\BaseClass\APIRequest[call]', [new PHPClient, '/any/method', 'GET']);
         $mock->shouldReceive('call')->withNoArgs()->andReturn(['data' => '{"x": []}', 'status' => 200]);
 
-        new EntityList($client, $mock, 'X');
+        new EntityList(new PHPClient, $mock, 'X');
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKUnexpectedResponseException
      * @expectedExceptionMessage pagination
      */
     public function testEntityListBadRespMissingMetaPagination() {
-        $client = new PHPClient;
-
         $mock = \Mockery::mock('LeanTesting\API\Client\BaseClass\APIRequest[call]', [new PHPClient, '/any/method', 'GET']);
         $mock->shouldReceive('call')->withNoArgs()->andReturn(['data' => '{"x": [], "meta": {}}', 'status' => 200]);
 
-        new EntityList($client, $mock, 'X');
+        new EntityList(new PHPClient, $mock, 'X');
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKUnexpectedResponseException
      * @expectedExceptionMessage collection
      */
     public function testEntityListBadRespMissingCollection() {
-        $client = new PHPClient;
-
         $mock = \Mockery::mock('LeanTesting\API\Client\BaseClass\APIRequest[call]', [new PHPClient, '/any/method', 'GET']);
         $mock->shouldReceive('call')->withNoArgs()->andReturn(['data' => '{"meta": {"pagination": {}}}', 'status' => 200]);
 
-        new EntityList($client, $mock, 'X');
+        new EntityList(new PHPClient, $mock, 'X');
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKUnexpectedResponseException
-     * @expectedExceptionMessage xxy, yyx
+     * @expectedExceptionMessage multiple
      */
     public function testEntityListBadRespMultipleCollections() {
-        $client = new PHPClient;
-
         $mock = \Mockery::mock('LeanTesting\API\Client\BaseClass\APIRequest[call]', [new PHPClient, '/any/method', 'GET']);
         $mock->shouldReceive('call')->withNoArgs()->andReturn(['data' => '{"xxy": [], "yyx": [], "meta": {"pagination": {}}}', 'status' => 200]);
 
-        new EntityList($client, $mock, 'X');
+        new EntityList(new PHPClient, $mock, 'X');
     }
     /* END EntityList */
 

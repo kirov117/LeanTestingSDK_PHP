@@ -2,8 +2,6 @@
 
 namespace LeanTesting\API\Client\Test;
 
-use Mockery;
-
 use LeanTesting\API\Client\PHPClient;
 
 use LeanTesting\API\Client\BaseClass\Entity;

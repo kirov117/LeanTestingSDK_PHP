@@ -4,6 +4,8 @@ namespace LeanTesting\API\Client\Test;
 
 use LeanTesting\API\Client\PHPClient;
 
+use LeanTesting\API\Client\Exception\SDKInvalidArgException;
+
 use LeanTesting\API\Client\Entity\Bug\Bug;
 use LeanTesting\API\Client\Entity\Bug\BugAttachment;
 use LeanTesting\API\Client\Entity\Bug\BugComment;
@@ -64,15 +66,15 @@ class EntitiesTest extends \PHPUnit_Framework_TestCase
         ['LeanTesting\API\Client\Entity\User\UserOrganization']
     ];
 
-    public function testEntitiesCorrectParent() {
-        foreach ($this->entity_colllection as $e) {
-            $this->assertInstanceOf('LeanTesting\API\Client\BaseClass\Entity', new $e[0](new PHPClient, ['id' => 1]));
-        }
-    }
-
     public function testEntitiesDefined() {
         foreach ($this->entity_colllection as $e) {
             $this->assertTrue(class_exists($e[0]));
+        }
+    }
+
+    public function testEntitiesCorrectParent() {
+        foreach ($this->entity_colllection as $e) {
+            $this->assertInstanceOf('LeanTesting\API\Client\BaseClass\Entity', new $e[0](new PHPClient, ['id' => 1]));
         }
     }
 
@@ -83,21 +85,27 @@ class EntitiesTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
-     */
     public function testEntitiesInstanceNonArrData() {
         foreach ($this->entity_colllection as $e) {
-            new $e[0](new PHPClient, '');
+            try {
+                new $e[0](new PHPClient, '');
+                $this->fail('No exception thrown');
+            } catch(SDKInvalidArgException $ex) {
+            } catch(\Exception $ex) {
+                $this->fail('Unexpected exception received');
+            }
         }
     }
 
-    /**
-     * @expectedException LeanTesting\API\Client\Exception\SDKInvalidArgException
-     */
     public function testEntitiesInstanceEmptyData() {
         foreach ($this->entity_colllection as $e) {
-            new $e[0](new PHPClient, []);
+            try {
+                new $e[0](new PHPClient, []);
+                $this->fail('No exception thrown');
+            } catch(SDKInvalidArgException $ex) {
+            } catch(\Exception $ex) {
+                $this->fail('Unexpected exception received');
+            }
         }
     }
 

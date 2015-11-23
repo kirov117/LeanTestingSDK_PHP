@@ -89,7 +89,7 @@ class APIRequest
      *
      * Executes cURL call as per current API definition state.
      *
-     * @return mixed Returns resulting data response from server (including errors and inconsistencies)
+     * @return str Returns resulting data response from server (including errors and inconsistencies)
      *
      */
     public function call() {
@@ -187,7 +187,6 @@ class APIRequest
         }
 
         $json_data = json_decode($curl_data, true); // normally, expect JSON qualified output
-
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new SDKBadJSONResponseException($curl_data);
         }

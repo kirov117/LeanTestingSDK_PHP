@@ -71,21 +71,21 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase
     /* RAISE WITH ARR (when supported) */
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKDuplicateRequestException
-     * @expectedExceptionMessage xx, yy, zz
+     * @expectedExceptionMessage Duplicate
      */
     public function testDuplicateRequestRaiseWithArr() {
         throw new SDKDuplicateRequestException(['xx', 'yy', 'zz']);
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKIncompleteRequestException
-     * @expectedExceptionMessage xx, yy, zz
+     * @expectedExceptionMessage Incomplete
      */
     public function testIncompleteRequestRaiseWithArr() {
         throw new SDKIncompleteRequestException(['xx', 'yy', 'zz']);
     }
     /**
      * @expectedException LeanTesting\API\Client\Exception\SDKUnsupportedRequestException
-     * @expectedExceptionMessage xx, yy, zz
+     * @expectedExceptionMessage Unsupported
      */
     public function testUnsupportedRequestRaiseWithArr() {
         throw new SDKUnsupportedRequestException(['xx', 'yy', 'zz']);
